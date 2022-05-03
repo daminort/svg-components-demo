@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, useRef } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 
 import { svgUtils } from '../../utils/svgUtils';
 import { PAGE } from '../../constants/page';
@@ -13,7 +13,6 @@ const Layout = (props) => {
     children,
     width = PAGE.width,
     height = PAGE.height,
-    scale = PAGE.scale,
     background = null,
     onBoxCreate = null,
   } = props;

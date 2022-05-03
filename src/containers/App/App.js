@@ -1,33 +1,21 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 
-import { Box } from '../../components/Box';
-import { Layout } from '../../components/Layout';
-import { Footer } from '../../containers/Footer';
-import { mockBoxes } from '../../mocks/boxes';
+import { ROUTES } from '../../constants/routes';
+import { Header } from '../Header';
+import { Doc } from '../Doc';
 import { Wrapper } from './App.style';
-import page from '../../mocks/page.png';
 
 const App = () => {
 
-  const [boxes, setBoxes] = useState(mockBoxes);
-
-  const onBoxCreate = useCallback((box) => {
-    const resBoxes = boxes.concat(box);
-    setBoxes(resBoxes);
-  }, [boxes]);
+  const [route, setRoute] = useState(ROUTES.doc);
 
   return (
     <>
+      <Header route={route} onChange={setRoute} />
       <Wrapper>
-        <Layout onBoxCreate={onBoxCreate} background={page}>
-          {boxes.map((box, index) => {
-            return (
-              <Box key={index} {...box} />
-            );
-          })}
-        </Layout>
+        {route === ROUTES.doc && (<Doc />)}
+        {route === ROUTES.blocks && (<div />)}
       </Wrapper>
-      <Footer boxes={boxes} />
     </>
   );
 }
