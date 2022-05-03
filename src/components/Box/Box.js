@@ -17,6 +17,7 @@ const Box = (props) => {
     title = '',
     boxClassName = '',
     textClassName = '',
+    children = null,
   } = props;
 
   const textProps = title && svgUtils.defineTextProps({ x, y, width, height });
@@ -46,6 +47,7 @@ const Box = (props) => {
           {title}
         </text>
       )}
+      {children}
     </g>
   );
 };
