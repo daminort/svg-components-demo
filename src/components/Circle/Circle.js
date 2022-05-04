@@ -9,14 +9,14 @@ const Circle = (props) => {
     y = 0,
     backgroundColor = THEME.colors.transparent,
     strokeColor = THEME.colors.darkGray,
-    strokeWidth = 2,
+    strokeWidth = 1,
     radius = 10,
     className = '',
     children = null,
   } = props;
 
   return (
-    <g transform="translate(0.5, 0.5)" id={id}>
+    <g id={id}>
       <circle
         id={id}
         cx={x}

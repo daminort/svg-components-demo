@@ -10,12 +10,12 @@ const Line = (props) => {
     x2 = 0,
     y2 = 0,
     strokeColor = THEME.colors.darkGray,
-    strokeWidth = 2,
+    strokeWidth = 1,
     className = '',
   } = props;
 
   return (
-    <g transform="translate(0.5, 0.5)" id={id}>
+    <g id={id}>
       <line
         id={id}
         x1={x1}

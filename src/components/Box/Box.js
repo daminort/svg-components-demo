@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { THEME } from '../../constants/theme';
-import { svgUtils } from '../../utils/svgUtils';
 
 const Box = (props) => {
   const {
@@ -12,18 +11,13 @@ const Box = (props) => {
     height = 10,
     backgroundColor = THEME.colors.transparent,
     strokeColor = THEME.colors.darkGray,
-    strokeWidth = 2,
+    strokeWidth = 1,
     radius = 2,
-    title = '',
     boxClassName = '',
-    textClassName = '',
-    children = null,
   } = props;
 
-  const textProps = title && svgUtils.defineTextProps({ x, y, width, height });
-
   return (
-    <g transform="translate(0.5, 0.5)" id={id}>
+    <g id={id}>
       <rect
         id={id}
         x={x}
@@ -38,16 +32,6 @@ const Box = (props) => {
         className={boxClassName}
         pointerEvents="all"
       />
-      {title && (
-        <text
-          id={id}
-          className={textClassName}
-          {...textProps}
-        >
-          {title}
-        </text>
-      )}
-      {children}
     </g>
   );
 };

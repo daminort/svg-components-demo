@@ -13,5 +13,9 @@ export const THEME = {
     yellow: '#FCE04E',
     deepPurple: '#6100FF',
     transparent: 'transparent',
+    // named
+    basic: '#00278A',
+    advanced: '#002C56',
+    additional: '#00798A',
   }
 };

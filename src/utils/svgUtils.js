@@ -1,18 +1,4 @@
 
-function defineTextProps(shape) {
-  const { x, y, width, height } = shape;
-
-  const centerY = y + height / 2;
-  const centerX = x + width / 2;
-
-  return {
-    x: centerX,
-    y: centerY,
-    alignmentBaseline: 'middle',
-    textAnchor: 'middle',
-  };
-}
-
 function detectRelativeCoordinates(containerID, absoluteX, absoluteY) {
   const block = document.getElementById(containerID);
   if (!block) {
@@ -52,10 +38,35 @@ function createBox(start, end, title = '') {
   };
 }
 
+function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+  const angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
+
+  return {
+    x: centerX + (radius * Math.cos(angleInRadians)),
+    y: centerY + (radius * Math.sin(angleInRadians))
+  };
+}
+
+function defineArc(x, y, radius, startAngle, endAngle){
+
+  const start = polarToCartesian(x, y, radius, endAngle);
+  const end = polarToCartesian(x, y, radius, startAngle);
+
+  const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
+
+  const d = [
+    'M', start.x, start.y,
+    'A', radius, radius, 0, largeArcFlag, 0, end.x, end.y
+  ].join(' ');
+
+  return d;
+}
+
 const svgUtils = {
-  defineTextProps,
   detectRelativeCoordinates,
   createBox,
+  polarToCartesian,
+  defineArc,
 };
 
 export {
