@@ -17,22 +17,20 @@ const Box = (props) => {
   } = props;
 
   return (
-    <g id={id}>
-      <rect
-        id={id}
-        x={x}
-        y={y}
-        width={width}
-        height={height}
-        fill={backgroundColor}
-        stroke={strokeColor}
-        strokeWidth={strokeWidth}
-        rx={radius}
-        ry={radius}
-        className={boxClassName}
-        pointerEvents="all"
-      />
-    </g>
+    <rect
+      id={id}
+      x={x}
+      y={y}
+      width={width}
+      height={height}
+      fill={backgroundColor}
+      stroke={strokeColor}
+      strokeWidth={strokeWidth}
+      rx={radius}
+      ry={radius}
+      className={boxClassName}
+      pointerEvents="all"
+    />
   );
 };
 

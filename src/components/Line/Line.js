@@ -15,18 +15,16 @@ const Line = (props) => {
   } = props;
 
   return (
-    <g id={id}>
-      <line
-        id={id}
-        x1={x1}
-        y1={y1}
-        x2={x2}
-        y2={y2}
-        stroke={strokeColor}
-        strokeWidth={strokeWidth}
-        className={className}
-      />
-    </g>
+    <line
+      id={id}
+      x1={x1}
+      y1={y1}
+      x2={x2}
+      y2={y2}
+      stroke={strokeColor}
+      strokeWidth={strokeWidth}
+      className={className}
+    />
   );
 };
 

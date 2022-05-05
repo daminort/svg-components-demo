@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
   width: 60vw;
   height: 80vh;
   background-color: ${THEME.colors.white};
+  overflow: hidden;
   
   svg {
     width: 100%;

@@ -35,7 +35,7 @@ const Card = (props) => {
     if (onClose) {
       onClose(id);
     }
-  }, [onClose])
+  }, [id, onClose])
 
   const color = colors[type];
   const shape = defineCardShape(row, col);

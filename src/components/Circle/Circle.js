@@ -12,23 +12,19 @@ const Circle = (props) => {
     strokeWidth = 1,
     radius = 10,
     className = '',
-    children = null,
   } = props;
 
   return (
-    <g id={id}>
-      <circle
-        id={id}
-        cx={x}
-        cy={y}
-        r={radius}
-        stroke={strokeColor}
-        strokeWidth={strokeWidth}
-        fill={backgroundColor}
-        className={className}
-      />
-      {children}
-    </g>
+    <circle
+      id={id}
+      cx={x}
+      cy={y}
+      r={radius}
+      stroke={strokeColor}
+      strokeWidth={strokeWidth}
+      fill={backgroundColor}
+      className={className}
+    />
   );
 };
 

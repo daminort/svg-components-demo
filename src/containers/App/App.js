@@ -8,7 +8,7 @@ import { Wrapper } from './App.style';
 
 const App = () => {
 
-  const [route, setRoute] = useState(ROUTES.blocks);
+  const [route, setRoute] = useState(ROUTES.doc);
 
   return (
     <>
