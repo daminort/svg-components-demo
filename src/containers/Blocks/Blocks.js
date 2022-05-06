@@ -19,7 +19,10 @@ const Blocks = () => {
     return commonUtils.createRelations(mockCards);
   }, []);
 
-  const onMouseDown = useCallback(() => {
+  const onMouseDown = useCallback((event) => {
+    if (event?.target?.id !== containerID) {
+      return;
+    }
     setDragging(true);
   }, []);
 
@@ -56,13 +59,14 @@ const Blocks = () => {
     setScale(resScale);
   }, [scale]);
 
-  const svgStyle = {
+  const svgStyle = useMemo(() => ({
     cursor: dragging ? 'move' : 'auto',
-  };
-  const groupStyle = {
+  }), [dragging]);
+
+  const groupStyle = useMemo(() => ({
     transform: `translate3d(${shift.x}px, ${shift.y}px, 0) scale(${scale})`,
     cursor: dragging ? 'move' : 'auto',
-  };
+  }), [dragging, shift, scale]);
 
   return (
     <Wrapper>
@@ -75,8 +79,8 @@ const Blocks = () => {
         onWheel={onWheel}
       >
         <g style={groupStyle}>
-          <Cards />
           <Archers relations={relations} />
+          <Cards />
         </g>
       </svg>
     </Wrapper>

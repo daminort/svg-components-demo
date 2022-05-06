@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 
 import { DND_TYPES } from '../../../constants/dnd';
+
+const basicStyle = {
+  userSelect: 'none',
+};
 
 const Draggable = (props) => {
   const {
@@ -20,7 +24,12 @@ const Draggable = (props) => {
   });
 
   const Wrapper = `${tag}`;
-  const style = transform ? { transform: CSS.Translate.toString(transform) } : undefined;
+
+  const style = useMemo(() => ({
+    ...basicStyle,
+    transform: transform ? CSS.Translate.toString(transform) : 'none',
+    cursor: transform ? 'move' : 'auto',
+  }), [transform]);
 
   return (
     <Wrapper ref={setNodeRef} className={className} style={style} {...listeners}>

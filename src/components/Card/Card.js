@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import clsx from 'clsx';
 
 import { THEME } from '../../constants/theme';
 import { CARD_TYPES } from '../../constants/cards';
@@ -10,8 +11,12 @@ import {
   defineTitleProps,
   defineIDProps,
   defineIconCloseProps,
+  defineDropAreaProps,
+  defineButtonPlusProps,
 } from './assets';
 import { CloseIcon } from '../../lib/icons';
+import { ButtonPlus } from '../ButtonPlus';
+import { Wrapper } from './Card.style';
 
 const colors = {
   [CARD_TYPES.basic]: THEME.colors.basic,
@@ -28,14 +33,24 @@ const Card = (props) => {
     name = '',
     title = '',
     type = CARD_TYPES.basic,
+    dragging = false,
     onClose = null,
+    onAdd = null,
   } = props;
 
-  const onCloseClick = useCallback(() => {
+  const onCloseClick = useCallback((event) => {
+    event.stopPropagation();
     if (onClose) {
       onClose(id);
     }
-  }, [id, onClose])
+  }, [id, onClose]);
+
+  const onPlusClick = useCallback((event) => {
+    event.stopPropagation();
+    if (onAdd) {
+      onAdd(id);
+    }
+  }, [id, onAdd]);
 
   const color = colors[type];
   const shape = defineCardShape(row, col);
@@ -44,9 +59,15 @@ const Card = (props) => {
   const titleProps = defineTitleProps(innerShape);
   const idProps = defineIDProps(innerShape);
   const iconCloseProps = defineIconCloseProps(shape);
+  const dropAreaProps = defineDropAreaProps(shape);
+  const buttonPlusProps = defineButtonPlusProps(shape);
+
+  const wrapperCls = clsx({
+    dragging,
+  });
 
   return (
-    <g id={id}>
+    <Wrapper id={id} className={wrapperCls}>
       <Box
         id={id}
         backgroundColor={color}
@@ -66,12 +87,21 @@ const Card = (props) => {
         <div xmlns="http://www.w3.org/1999/xhtml">{title}</div>
       </foreignObject>
       <text id={`id-${id}`} {...idProps}>{id}</text>
-      <foreignObject {...iconCloseProps} onClick={onCloseClick}>
-        <span>
+      <foreignObject {...iconCloseProps}>
+        <span onClick={onCloseClick}>
           <CloseIcon />
         </span>
       </foreignObject>
-    </g>
+      {!dragging && (
+        <g {...dropAreaProps}>
+          <foreignObject {...buttonPlusProps}>
+          <span className="btn-plus" onClick={onPlusClick}>
+            <ButtonPlus />
+          </span>
+          </foreignObject>
+        </g>
+      )}
+    </Wrapper>
   );
 };
 

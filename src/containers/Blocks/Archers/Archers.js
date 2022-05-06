@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { Archer } from '../../../components/Archer';
 
-const Archers = (props) => {
+const Archers = memo((props) => {
   const {
     relations = [],
   } = props;
 
   return (
-    <g transform="translate(0.5, 0.5)">
+    <g>
       {relations.map(item => {
         return (
           <Archer key={item.id} {...item} />
@@ -16,6 +16,6 @@ const Archers = (props) => {
       })}
     </g>
   );
-};
+});
 
 export { Archers };

@@ -81,3 +81,25 @@ export function defineIconCloseProps(shape) {
     cursor: 'pointer',
   };
 }
+
+export function defineDropAreaProps(shape) {
+
+  return {
+    x: shape.x + shape.width + 8,
+    y: shape.y,
+    width: CARD.gap,
+    height: shape.height,
+  };
+}
+
+export function defineButtonPlusProps(shape) {
+
+  return {
+    x: shape.x + shape.width + 2,
+    y: shape.y + (shape.width / 2) - 27,
+    width: 24,
+    height: 24,
+    color: THEME.colors.gray,
+    cursor: 'pointer',
+  };
+}
