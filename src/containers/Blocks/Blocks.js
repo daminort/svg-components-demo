@@ -63,7 +63,10 @@ const Blocks = () => {
 
   }, [scale]);
 
-  const style = {
+  const svgStyle = {
+    cursor: dragging ? 'move' : 'auto',
+  };
+  const groupStyle = {
     transform: `translate3d(${shift.x}px, ${shift.y}px, 0) scale(${scale})`,
     cursor: dragging ? 'move' : 'auto',
   };
@@ -73,19 +76,20 @@ const Blocks = () => {
       <DndContext>
         <svg
           id={containerID}
+          style={svgStyle}
           onMouseDown={onMouseDown}
           onMouseMove={onMouseMove}
           onMouseUp={onMouseUp}
           onWheel={onWheel}
         >
-          <g style={style}>
+          <g style={groupStyle}>
             {mockCards.map(card => {
               return (
                 <Card key={card.id} {...card} onClose={onClose} />
               )
             })}
+            <Archers relations={relations} />
           </g>
-          <Archers relations={relations} />
         </svg>
       </DndContext>
     </Wrapper>
