@@ -1,11 +1,9 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { DndContext } from '@dnd-kit/core';
 
-import { Card } from '../../components/Card';
-
-import { commonUtils } from '../../utils/common';
+import { commonUtils } from '../../utils/commonUtils';
 import { mockCards } from '../../mocks/cards';
 
+import { Cards } from './Cards';
 import { Archers } from './Archers';
 import { Wrapper } from './Blocks.style';
 
@@ -19,10 +17,6 @@ const Blocks = () => {
 
   const relations = useMemo(() => {
     return commonUtils.createRelations(mockCards);
-  }, []);
-
-  const onClose = useCallback((id) => {
-    console.log(`Closed block: ${id}`);
   }, []);
 
   const onMouseDown = useCallback(() => {
@@ -60,7 +54,6 @@ const Blocks = () => {
     if (resScale > 2) { resScale = 2 }
 
     setScale(resScale);
-
   }, [scale]);
 
   const svgStyle = {
@@ -73,25 +66,19 @@ const Blocks = () => {
 
   return (
     <Wrapper>
-      <DndContext>
-        <svg
-          id={containerID}
-          style={svgStyle}
-          onMouseDown={onMouseDown}
-          onMouseMove={onMouseMove}
-          onMouseUp={onMouseUp}
-          onWheel={onWheel}
-        >
-          <g style={groupStyle}>
-            {mockCards.map(card => {
-              return (
-                <Card key={card.id} {...card} onClose={onClose} />
-              )
-            })}
-            <Archers relations={relations} />
-          </g>
-        </svg>
-      </DndContext>
+      <svg
+        id={containerID}
+        style={svgStyle}
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseUp}
+        onWheel={onWheel}
+      >
+        <g style={groupStyle}>
+          <Cards />
+          <Archers relations={relations} />
+        </g>
+      </svg>
     </Wrapper>
   );
 };

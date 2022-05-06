@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDroppable } from '@dnd-kit/core';
 
+import { DND_TYPES } from '../../../constants/dnd';
+
 const Droppable = (props) => {
   const {
     id,
@@ -8,6 +10,7 @@ const Droppable = (props) => {
     className = '',
     styleOver = undefined,
     children = null,
+    accept = [DND_TYPES.block],
   } = props;
 
   const { isOver, setNodeRef } = useDroppable({
