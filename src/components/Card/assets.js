@@ -82,16 +82,6 @@ export function defineIconCloseProps(shape) {
   };
 }
 
-export function defineDropAreaProps(shape) {
-
-  return {
-    x: shape.x + shape.width + 8,
-    y: shape.y,
-    width: CARD.gap,
-    height: shape.height,
-  };
-}
-
 export function defineButtonPlusProps(shape) {
 
   return {

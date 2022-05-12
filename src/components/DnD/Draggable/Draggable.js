@@ -14,11 +14,13 @@ const Draggable = (props) => {
     tag = 'div',
     className = '',
     type = DND_TYPES.block,
+    data = {},
   } = props;
 
   const { listeners, setNodeRef, transform } = useDraggable({
     id,
     data: {
+      ...data,
       type,
     },
   });

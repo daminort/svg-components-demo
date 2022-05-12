@@ -20,7 +20,9 @@ const Blocks = () => {
   }, []);
 
   const onMouseDown = useCallback((event) => {
-    if (event?.target?.id !== containerID) {
+    const { button, target } = event;
+    const startDragging = (button === 0 && target?.id === containerID);
+    if (!startDragging) {
       return;
     }
     setDragging(true);

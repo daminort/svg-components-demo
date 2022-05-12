@@ -1,0 +1,8 @@
+import styled from 'styled-components';
+
+export const Wrapper = styled.g`
+  
+  //.placeholder {
+  //  display: none;
+  //}
+`;

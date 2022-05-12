@@ -1,9 +1,11 @@
-import React, { useCallback, useState, useMemo, memo } from 'react';
+import React, { useCallback, useState, useMemo, memo, Fragment } from 'react';
 import { DndContext, DragOverlay, MouseSensor, useSensor, useSensors } from '@dnd-kit/core';
 
-import { Draggable } from '../../../components/DnD/Draggable';
+import { Draggable, Droppable } from '../../../components/DnD';
 import { Card } from '../../../components/Card';
+import { Placeholder } from '../../../components/Placeholder';
 import { mockCards } from '../../../mocks/cards';
+import { Wrapper } from './Cards.style';
 
 const activationConstraint = {
   delay: 250,
@@ -31,6 +33,7 @@ const Cards = memo(() => {
   }, []);
 
   const onDragEnd = useCallback((event) => {
+    console.log('Cards.js,  [34]: ', { event });
     setActiveCardID(null);
   }, []);
 
@@ -51,20 +54,42 @@ const Cards = memo(() => {
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
     >
-      {mockCards.map(card => {
-        return (
-          <Draggable
-            tag="g"
-            key={card.id}
-            id={card.id}
-          >
-            <Card {...card} onClose={onClose} onAdd={onAdd} />
-          </Draggable>
-        )
-      })}
-      <DragOverlay zIndex={100} wrapperElement="g">
-        {activeCard}
-      </DragOverlay>
+      <Wrapper>
+        {mockCards.map(card => {
+          const droppableData = {
+            row: card.row,
+            col: card.col,
+          };
+
+          return (
+            <Fragment key={card.id}>
+              <Draggable
+                tag="g"
+                id={card.id}
+              >
+                <Card {...card} onClose={onClose} onAdd={onAdd} />
+              </Draggable>
+              <Droppable
+                tag="g"
+                id={card.id}
+                data={droppableData}
+                style={{ display: 'none' }}
+                styleOver={{ display: 'initial' }}
+              >
+                <Placeholder
+                  id={`placeholder-${card.id}`}
+                  row={card.row}
+                  col={card.col}
+                  className="placeholder"
+                />
+              </Droppable>
+            </Fragment>
+          )
+        })}
+        <DragOverlay zIndex={100} wrapperElement="g">
+          {activeCard}
+        </DragOverlay>
+      </Wrapper>
     </DndContext>
   );
 });

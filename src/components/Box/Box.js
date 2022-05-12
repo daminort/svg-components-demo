@@ -12,8 +12,9 @@ const Box = (props) => {
     backgroundColor = THEME.colors.transparent,
     strokeColor = THEME.colors.darkGray,
     strokeWidth = 1,
+    strokeDasharray = 0,
     radius = 2,
-    boxClassName = '',
+    className = '',
   } = props;
 
   return (
@@ -26,9 +27,10 @@ const Box = (props) => {
       fill={backgroundColor}
       stroke={strokeColor}
       strokeWidth={strokeWidth}
+      strokeDasharray={strokeDasharray}
       rx={radius}
       ry={radius}
-      className={boxClassName}
+      className={className}
       pointerEvents="all"
     />
   );

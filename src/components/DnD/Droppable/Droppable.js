@@ -8,20 +8,32 @@ const Droppable = (props) => {
     id,
     tag = 'div',
     className = '',
+    style = undefined,
     styleOver = undefined,
     children = null,
     accept = [DND_TYPES.block],
+    data = {},
   } = props;
 
   const { isOver, setNodeRef } = useDroppable({
     id,
+    data: {
+      ...data,
+      accept,
+    },
   });
 
   const Wrapper = `${tag}`;
-  const style = isOver && styleOver ? styleOver : undefined;
+  let resStyle = undefined;
+  if (!isOver && style) {
+    resStyle = style;
+  }
+  if (isOver && styleOver) {
+    resStyle = styleOver;
+  }
 
   return (
-    <Wrapper ref={setNodeRef} className={className} style={style}>
+    <Wrapper ref={setNodeRef} className={className} style={resStyle}>
       {children}
     </Wrapper>
   );

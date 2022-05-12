@@ -11,7 +11,6 @@ import {
   defineTitleProps,
   defineIDProps,
   defineIconCloseProps,
-  defineDropAreaProps,
   defineButtonPlusProps,
 } from './assets';
 import { CloseIcon } from '../../lib/icons';
@@ -59,7 +58,6 @@ const Card = (props) => {
   const titleProps = defineTitleProps(innerShape);
   const idProps = defineIDProps(innerShape);
   const iconCloseProps = defineIconCloseProps(shape);
-  const dropAreaProps = defineDropAreaProps(shape);
   const buttonPlusProps = defineButtonPlusProps(shape);
 
   const wrapperCls = clsx({
@@ -73,6 +71,7 @@ const Card = (props) => {
         backgroundColor={color}
         strokeColor={color}
         strokeWidth={1}
+        className="box-background"
         {...shape}
       />
       <Box
@@ -93,13 +92,11 @@ const Card = (props) => {
         </span>
       </foreignObject>
       {!dragging && (
-        <g {...dropAreaProps}>
-          <foreignObject {...buttonPlusProps}>
+        <foreignObject {...buttonPlusProps}>
           <span className="btn-plus" onClick={onPlusClick}>
             <ButtonPlus />
           </span>
-          </foreignObject>
-        </g>
+        </foreignObject>
       )}
     </Wrapper>
   );
